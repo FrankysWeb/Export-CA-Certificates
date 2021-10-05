@@ -5,9 +5,9 @@ $ExportDir = "C:\ExportCerts"
 $ca = Get-CertificationAuthority -Name $CAName
 $allCerts = Get-IssuedRequest -CertificationAuthority $ca -property RawCertificate
  
-$ValidCerts = $allcerts | where {$_.NotAfter -gt (get-date)}
+$ValidCerts = $allcerts | Where-Object {$_.NotAfter -gt (get-date)}
 
-$SANCerts = $ValidCerts | where { $_.CertificateTemplateOid.FriendlyName -match "$TemplateName"}
+$SANCerts = $ValidCerts | Where-Object { $_.CertificateTemplateOid.FriendlyName -match "$TemplateName"}
  
 $pattern = '[^a-zA-Z]'
 foreach ($SANCert in $SANCerts) {
